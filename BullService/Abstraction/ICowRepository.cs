@@ -1,4 +1,5 @@
 ﻿using BullService.Models;
+using BullService.Models.Cow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace BullService.Abstraction
 {
-    public interface IBullRepository
+    public interface ICowRepository
     {
-        Task<IOperationResult<IEnumerable<BaseModel>>> GetBulls();
+        Task<IEnumerable<CowMeasurementModel>> GetMeasurements();
     }
 }
