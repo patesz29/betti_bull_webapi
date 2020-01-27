@@ -36,6 +36,7 @@ namespace BullService
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CowAPI", Version = "v1" });
+                c.DescribeAllEnumsAsStrings();
             });
             services.AddScoped<ICowRepository, CowRepository>();
             services.AddDbContext<CowDbContext>(options =>

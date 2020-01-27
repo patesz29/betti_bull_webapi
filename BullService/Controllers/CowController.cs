@@ -26,9 +26,9 @@ namespace BullService.Controllers
 
         [HttpGet("GetAllMeasurements")]
         [ProducesResponseType(typeof(IEnumerable<CowMeasurementModel>), (int) HttpStatusCode.OK)]
-        public async Task<IActionResult> GetAllMeasurements([FromQuery]string bullId)
+        public async Task<IActionResult> GetAllMeasurements([FromQuery]CowMeasurementFilter filter = null)
         {
-            var result = await _repo.GetMeasurements();
+            var result = await _repo.GetMeasurements(filter);
             return Ok(result);
         }
     }

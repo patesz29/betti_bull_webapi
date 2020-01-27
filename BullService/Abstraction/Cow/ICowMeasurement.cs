@@ -1,4 +1,7 @@
 ﻿using BullService.Models.Cow;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
 
 namespace BullService.Abstraction.Cow
 {
@@ -51,10 +54,10 @@ namespace BullService.Abstraction.Cow
     {
         Normal = 0
     }
-
+    [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
     public enum QLazResultEnum
     {
-        Positive = 0,
-        Negative = 1
+        Positive,
+        Negative
     }
 }
