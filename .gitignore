@@ -6,3 +6,5 @@
 /.vs/VSWorkspaceState.json
 /.vs/slnx.sqlite
 /.vs/Betti_Bull_WebAPI/DesignTimeBuild
+/BullService/obj/Debug/netcoreapp3.1.1
+/BullService/obj/Debug/netcoreapp3.1

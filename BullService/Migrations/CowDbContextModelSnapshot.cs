@@ -150,7 +150,7 @@ namespace BullService.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CowMeasurementId")
+                    b.Property<Guid>("MeasurementId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PictureDescription")
@@ -161,23 +161,25 @@ namespace BullService.Migrations
 
                     b.HasKey("PictureId");
 
-                    b.HasIndex("CowMeasurementId");
+                    b.HasIndex("MeasurementId");
 
-                    b.ToTable("PictureModel");
+                    b.ToTable("CowPictures");
                 });
 
             modelBuilder.Entity("BullService.Models.Cow.CowMeasurementModel", b =>
                 {
                     b.HasOne("BullService.Models.Cow.CowModel", "Cow")
-                        .WithMany("CowMeasurements")
+                        .WithMany()
                         .HasForeignKey("CowId");
                 });
 
             modelBuilder.Entity("BullService.Models.PictureModel", b =>
                 {
-                    b.HasOne("BullService.Models.Cow.CowMeasurementModel", "CowMeasurement")
+                    b.HasOne("BullService.Models.Cow.CowMeasurementModel", "Measurement")
                         .WithMany("MeasurementPictures")
-                        .HasForeignKey("CowMeasurementId");
+                        .HasForeignKey("MeasurementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

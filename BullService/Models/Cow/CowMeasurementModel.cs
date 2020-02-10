@@ -1,8 +1,10 @@
 ﻿using BullService.Abstraction;
 using BullService.Abstraction.Cow;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BullService.Models.Cow
 {
@@ -10,8 +12,10 @@ namespace BullService.Models.Cow
     {
         [Key]
         public Guid Id { get; set; }
-
+        public string CowId { get; set; }
+        [ForeignKey("CowId")]
         public CowModel Cow { get; set; }
+        [Required]
         public MeasurementTypeEnum MeasurementType { get; set; }
 
         public DateTime MeasurementDate { get; set; }

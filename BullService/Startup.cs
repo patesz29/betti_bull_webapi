@@ -36,7 +36,6 @@ namespace BullService
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CowAPI", Version = "v1" });
-                c.DescribeAllEnumsAsStrings();
             });
             services.AddScoped<ICowRepository, CowRepository>();
             services.AddDbContext<CowDbContext>(options =>
@@ -51,6 +50,15 @@ namespace BullService
             {
                 app.UseDeveloperExceptionPage();
             }
+            try
+            {
+                using (var migrationSvcScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                    .CreateScope())
+                {
+                    migrationSvcScope.ServiceProvider.GetService<CowDbContext>().Database.Migrate();
+                }
+            }
+            catch (Exception e) { }
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),

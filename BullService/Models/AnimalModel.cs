@@ -7,10 +7,7 @@ namespace BullService.Models
     public class AnimalModel : IAnimalModel
     {
         [Key]
-        public string Id
-        {
-            get => Id; set => string.Concat(EnarNumber, "-", EarNumber);
-        }
+        public string Id { get; set; }
         public int EarNumber { get; set; }
         public int EnarNumber { get; set; }
         /// <summary>

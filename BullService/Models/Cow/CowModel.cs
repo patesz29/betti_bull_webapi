@@ -1,6 +1,8 @@
 ﻿using BullService.Abstraction.Cow;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BullService.Models.Cow
 {
@@ -16,7 +18,6 @@ namespace BullService.Models.Cow
         public int Treatment { get ; set; }
         public CalfSexEnum CalfSex { get ; set; }
         public int CalfWeight { get ; set; }
-        public ICollection<CowMeasurementModel> CowMeasurements { get; set; }
 
  
     }

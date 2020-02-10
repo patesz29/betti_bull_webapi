@@ -10,5 +10,9 @@ namespace BullService.Abstraction
     public interface ICowRepository
     {
         Task<IEnumerable<CowMeasurementModel>> GetMeasurements(CowMeasurementFilter filter);
+
+        Task<IOperationResult<CowMeasurementModel>> CreateOrUpdateMeasurement(CowMeasurementModel model);
+
+        Task<IOperationResult<CowModel>> CreateOrUpdateCow(CowModel model);
     }
 }

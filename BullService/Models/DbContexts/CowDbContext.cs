@@ -22,9 +22,6 @@ namespace BullService.Models.DbContexts
             .HasConversion(
                 v => string.Join(',', v),
                 v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
-            modelBuilder.Entity<CowModel>()
-                .HasMany(c => c.CowMeasurements)
-                .WithOne(e => e.Cow);
         }
     }
 }
