@@ -9,6 +9,7 @@ using BullService.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,7 +41,12 @@ namespace BullService
             services.AddScoped<ICowRepository, CowRepository>();
             services.AddDbContext<CowDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "../AngularApp/dist";
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +73,12 @@ namespace BullService
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cow API V1");
             });
+            app.UseSpaStaticFiles();
+
+            app.UseCors("CorsPolicy");
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -74,6 +86,20 @@ namespace BullService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "../AngularApp";
+
+                if (env.IsDevelopment())
+                {
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                }
             });
         }
     }
