@@ -10,3 +10,7 @@
 /BullService/obj/Debug/netcoreapp3.1
 /BullService/bin/Debug/netcoreapp3.0
 /BullService/obj
+AngularApp/.editorconfig
+.vs/Betti_Bull_WebAPI/config/applicationhost.config
+AngularApp/.vscode/settings.json
+AngularApp/.vscode/settings.json
