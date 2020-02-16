@@ -9,6 +9,7 @@ using BullService.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -74,9 +75,13 @@ namespace BullService
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cow API V1");
             });
             app.UseSpaStaticFiles();
-
-            app.UseCors("CorsPolicy");
-            app.UseHttpsRedirection();
+            app.UseCors(builder => builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .SetIsOriginAllowed((host) => true)
+                .AllowCredentials()
+            );
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -87,6 +92,9 @@ namespace BullService
             {
                 endpoints.MapControllers();
             });
+
+            app.UseRewriter(new RewriteOptions()
+                .AddRedirect("index.html", "/"));
 
             app.UseSpa(spa =>
             {

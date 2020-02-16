@@ -10,7 +10,7 @@ using BullService.Models.Cow;
 namespace BullService.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CowController : ControllerBase
     {
         private readonly ILogger<CowController> _logger;
