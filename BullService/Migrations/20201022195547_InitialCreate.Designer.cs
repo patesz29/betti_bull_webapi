@@ -3,41 +3,39 @@ using System;
 using BullService.Models.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BullService.Migrations
 {
     [DbContext(typeof(CowDbContext))]
-    [Migration("20200210212725_InitialCreate")]
+    [Migration("20201022195547_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("BullService.Models.Cow.CowMeasurementModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<float>("Bcs")
-                        .HasColumnType("real");
+                        .HasColumnType("float");
 
                     b.Property<float>("BetaKarotin")
-                        .HasColumnType("real");
+                        .HasColumnType("float");
 
                     b.Property<float>("Bhb")
-                        .HasColumnType("real");
+                        .HasColumnType("float");
 
                     b.Property<float>("CervixDiameter")
-                        .HasColumnType("real");
+                        .HasColumnType("float");
 
                     b.Property<int>("CitologyResultCervix")
                         .HasColumnType("int");
@@ -46,34 +44,34 @@ namespace BullService.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CowId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("FirstSuccessfulFertilizationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<float>("HornDiameter")
-                        .HasColumnType("real");
+                        .HasColumnType("float");
 
                     b.Property<int>("LeftOvaryState")
                         .HasColumnType("int");
 
                     b.Property<string>("Lesion")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("MeasurementDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("MeasurementType")
                         .HasColumnType("int");
 
                     b.Property<float>("Nefa")
-                        .HasColumnType("real");
+                        .HasColumnType("float");
 
                     b.Property<string>("PregnancyDetectionResult30Day")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("PregnancyDetectionResult60Day")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("QLazResult")
                         .HasColumnType("int");
@@ -97,7 +95,7 @@ namespace BullService.Migrations
             modelBuilder.Entity("BullService.Models.Cow.CowModel", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<int>("CalfSex")
                         .HasColumnType("int");
@@ -109,13 +107,13 @@ namespace BullService.Migrations
                         .HasColumnType("int");
 
                     b.Property<float>("ClosedLactationMilkProd")
-                        .HasColumnType("real");
+                        .HasColumnType("float");
 
                     b.Property<int>("CourseOfCalving")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("DaysOfGestations")
                         .HasColumnType("int");
@@ -127,13 +125,13 @@ namespace BullService.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("LastCalvingDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("LastFertilizationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<float>("LastMilkingResult")
-                        .HasColumnType("real");
+                        .HasColumnType("float");
 
                     b.Property<int>("Site")
                         .HasColumnType("int");
@@ -150,16 +148,16 @@ namespace BullService.Migrations
                 {
                     b.Property<Guid>("PictureId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("MeasurementId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("PictureDescription")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("PicturePaths")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("PictureId");
 

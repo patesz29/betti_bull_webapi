@@ -1,0 +1,21 @@
+MariaDb setup steps:
+1. login to Synology with SSH after installing the MariaDb
+Example cmd: ssh 192.168.2.2
+2. login
+3. move to /usr/local/mariadb10/bin
+Example cmd: cd /usr/local/mariadb10/bin
+4. execute command: ./mysql -u root -p
+5. enter the root password you gave during MariaDb installation
+6. Execute the below commands, by changing the username and password (might be also the ip) to the correct ones:
+(Note: ' ' signs must remain!)
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+
+GRANT ALL PRIVILEGES ON *.* TO 'username'@'localhost' WITH GRANT OPTION;
+
+CREATE USER 'username'@'%' IDENTIFIED BY 'password';
+
+GRANT ALL PRIVILEGES ON *.* TO 'username'@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
+7. Once done with all four queries, it should connect with the given username and password

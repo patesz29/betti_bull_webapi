@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace BullService
 {
@@ -40,8 +41,9 @@ namespace BullService
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CowAPI", Version = "v1" });
             });
             services.AddScoped<ICowRepository, CowRepository>();
-            services.AddDbContext<CowDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContextPool<CowDbContext>(options =>
+                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseMySql(Configuration.GetConnectionString("MySqlConnection"), mysqlOptions=> mysqlOptions.ServerVersion(new Pomelo.EntityFrameworkCore.MySql.Storage.ServerVersion(new Version(10, 3, 21), ServerType.MariaDb))));
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -96,19 +98,19 @@ namespace BullService
             app.UseRewriter(new RewriteOptions()
                 .AddRedirect("index.html", "/"));
 
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
+            //app.UseSpa(spa =>
+            //{
+            //    // To learn more about options for serving an Angular SPA from ASP.NET Core,
+            //    // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "../AngularApp";
+            //    spa.Options.SourcePath = "../AngularApp";
 
-                if (env.IsDevelopment())
-                {
-                    //spa.UseAngularCliServer(npmScript: "start");
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
-                }
-            });
+            //    //if (env.IsDevelopment())
+            //    //{
+            //    //    //spa.UseAngularCliServer(npmScript: "start");
+            //    //    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+            //    //}
+            //});
         }
     }
 }

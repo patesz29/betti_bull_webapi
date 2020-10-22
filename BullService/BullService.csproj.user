@@ -5,5 +5,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <ActiveDebugProfile>BullService</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>docker.pkg.github.com_patesz29_betti_bull_webapi1</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
