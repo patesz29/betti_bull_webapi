@@ -12,15 +12,16 @@ namespace BullService.Repository
 {
     public class CowRepository : ICowRepository
     {
-        private CowDbContext _cowContext;
+        private readonly CowDbContext _cowContext;
         public CowRepository(CowDbContext cowContext)
         {
             _cowContext = cowContext;
         }
 
 
-        public Task<IEnumerable<CowMeasurementModel>> GetMeasurements(CowMeasurementFilter filter)
+        public Task<IEnumerable<CowMeasurementModel>> GetMeasurements(CowMeasurementFilter filter, bool addCowInfo)
         {
+            var set = addCowInfo ? _cowContext.CowMeasurements.AsExpandable() : _cowContext.CowMeasurements.Include(x=>x.Cow).AsExpandable();
             //Add filtering
             var pb = PredicateBuilder.New<CowMeasurementModel>().DefaultExpression = (p=>true);
 
@@ -34,28 +35,11 @@ namespace BullService.Repository
             pb = filter?.Nefa?.CheckAndBuild(pb) ?? pb;
             pb = filter?.SuccessfulFertilizationNumber?.CheckAndBuild(pb) ?? pb;
 
-            var filteredMeasurements = _cowContext.CowMeasurements.Include(x => x.Cow).AsExpandable().Where(pb.Compile()).AsEnumerable();
+            var filteredMeasurements = set.Where(pb.Compile()).AsEnumerable();
 
             return Task.FromResult(filteredMeasurements as IEnumerable<CowMeasurementModel>);
         }
 
-        public async Task<IOperationResult<CowModel>> CreateOrUpdateCow(CowModel model)
-        {
-            model.Id = string.Concat(model.EnarNumber, "-", model.EarNumber);
-            var cow = _cowContext.Cows.FirstOrDefault(x => x.Id == model.Id);
-            if (cow == null)
-                _cowContext.Cows.Add(model);
-            else
-            {
-                cow.Update(model);
-                _cowContext.Cows.Update(cow);
-            }
-            if (await _cowContext.SaveChangesAsync() > 0)
-            {
-                return new OperationResult<CowModel>(true, model);
-            }
-            return new OperationResult<CowModel>(false, null);
-        }
 
         public async Task<IOperationResult<CowMeasurementModel>> CreateOrUpdateMeasurement(CowMeasurementModel model)
         {
@@ -75,5 +59,29 @@ namespace BullService.Repository
             return new OperationResult<CowMeasurementModel>(false, null);
         }
 
+        public Task<IEnumerable<CowModel>> GetCows()
+        {
+            var set = _cowContext.Cows.AsEnumerable();
+            
+            return Task.FromResult(set);
+        }
+
+        public async Task<IOperationResult<CowModel>> CreateOrUpdateCow(CowModel model)
+        {
+            model.Id = string.Concat(model.EnarNumber, "-", model.EarNumber);
+            var cow = _cowContext.Cows.FirstOrDefault(x => x.Id == model.Id);
+            if (cow == null)
+                _cowContext.Cows.Add(model);
+            else
+            {
+                cow.Update(model);
+                _cowContext.Cows.Update(cow);
+            }
+            if (await _cowContext.SaveChangesAsync() > 0)
+            {
+                return new OperationResult<CowModel>(true, model);
+            }
+            return new OperationResult<CowModel>(false, null);
+        }
     }
 }

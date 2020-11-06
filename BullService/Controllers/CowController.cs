@@ -24,11 +24,11 @@ namespace BullService.Controllers
 
         [HttpGet("GetAllMeasurements")]
         [ProducesResponseType(typeof(IEnumerable<CowMeasurementModel>), (int) HttpStatusCode.OK)]
-        public async Task<IActionResult> GetAllMeasurements([FromQuery]CowMeasurementFilter filter = null)
+        public async Task<IActionResult> GetAllMeasurements([FromQuery]CowMeasurementFilter filter = null, [FromQuery] bool addCowInfo = false)
         {
             try
             {
-                var result = await _repo.GetMeasurements(filter);
+                var result = await _repo.GetMeasurements(filter, addCowInfo);
                 return Ok(result);
             }
 
@@ -55,6 +55,22 @@ namespace BullService.Controllers
                 return BadRequest();
             }
             catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("GetAllCows")]
+        [ProducesResponseType(typeof(IEnumerable<CowModel>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetAllCows()
+        {
+            try
+            {
+                var result = await _repo.GetCows();
+                return Ok(result);
+            }
+
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }

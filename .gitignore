@@ -13,3 +13,5 @@
 AngularApp/.editorconfig
 .vs/Betti_Bull_WebAPI/config/applicationhost.config
 AngularApp/.vscode/settings.json
+/BullService/bin/Release/netcoreapp3.0
+/BullService/Properties/PublishProfiles
