@@ -16,7 +16,7 @@ import { AppConfig } from '../config/config';
 
 export class CowMeasurementService extends BaseService {
 
-  private pathAPI = this.config.setting['PathAPI'];
+  private pathAPI = this.config.setting['PathBackEndAPI'];
 
   constructor(private http: HttpClient, private config: AppConfig) { super(); }
 
