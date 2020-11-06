@@ -21,7 +21,7 @@ namespace BullService.Repository
 
         public Task<IEnumerable<CowMeasurementModel>> GetMeasurements(CowMeasurementFilter filter, bool addCowInfo)
         {
-            var set = addCowInfo ? _cowContext.CowMeasurements.AsExpandable() : _cowContext.CowMeasurements.Include(x=>x.Cow).AsExpandable();
+            var set = addCowInfo ? _cowContext.CowMeasurements.Include(x => x.Cow).AsExpandable() : _cowContext.CowMeasurements.AsExpandable();
             //Add filtering
             var pb = PredicateBuilder.New<CowMeasurementModel>().DefaultExpression = (p=>true);
 
