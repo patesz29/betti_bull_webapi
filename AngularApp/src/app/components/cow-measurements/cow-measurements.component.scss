@@ -1,3 +1,31 @@
-.example-full-width {
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+  table {
+    border-spacing: 0;
     width: 100%;
+  }
+  .w-10ch{
+      width: 10ch;
+  }
+  .w-36ch{
+    width: 36ch;
+}
+  .mat-column-id {
+    word-wrap: normal !important;
+    white-space: nowrap !important;
+    flex: 0 0 10% !important;
+    width: 10% !important;
+  }
+  .mat-row {
+    height: auto;
+    width: fit-content;
+  }
+  th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    //padding: 10px 10px 10px 0;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+  }
+  th.mat-header-cell {
+    color: black;
+    font-weight: bold;
   }

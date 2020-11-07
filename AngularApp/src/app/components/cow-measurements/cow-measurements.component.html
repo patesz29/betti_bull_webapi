@@ -1,4 +1,81 @@
-<mat-form-field class="example-full-width">
-    <input matInput placeholder="text" [(ngModel)]="text">
-</mat-form-field>
-<p>Look at me! {{text}}</p>
+<h2>Cow Measurements</h2>
+  <table mat-table [dataSource]="dataSource"class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td class="w-36ch" mat-cell *matCellDef="let measurement">{{measurement.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="cowId">
+        <th mat-header-cell *matHeaderCellDef>CowID</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.cowId}}</td>
+    </ng-container>
+    <ng-container matColumnDef="measurementType">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.measurementType}}</td>
+    </ng-container>
+    <ng-container matColumnDef="bcs">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>BCS</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.bcs}}</td>
+    </ng-container>
+    <ng-container matColumnDef="lesion">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Lesion</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.lesion}}</td>
+    </ng-container>
+    <ng-container matColumnDef="uterusStatus">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Uterus</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.uterusStatus}}</td>
+    </ng-container>
+    <ng-container matColumnDef="cervixDiameter">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Cervix D.</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.cervixDiameter}}</td>
+    </ng-container>
+    <ng-container matColumnDef="hornDiameter">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Horn Diameter</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.hornDiameter}}</td>
+    </ng-container>
+    <ng-container matColumnDef="rightOvaryState">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Right Ovary</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.rightOvaryState}}</td>
+    </ng-container>
+    <ng-container matColumnDef="leftOvaryState">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Left Ovary</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.leftOvaryState}}</td>
+    </ng-container>
+    <ng-container matColumnDef="citologyResultCervix">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Citology (Cervix)</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.citologyResultCervix}}</td>
+    </ng-container>
+    <ng-container matColumnDef="citologyResultEndometrium">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Citology (Endometrium)</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.citologyResultEndometrium}}</td>
+    </ng-container>
+    <ng-container matColumnDef="nefa">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>NEFA</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.nefa}}</td>
+    </ng-container>
+    <ng-container matColumnDef="bhb">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>BHB</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.bhb}}</td>
+    </ng-container>
+    <ng-container matColumnDef="betaKarotin">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Beta Karotin</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.betaKarotin}}</td>
+    </ng-container>
+    <ng-container matColumnDef="qLazResult">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Qlaz</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.qLazResult}}</td>
+    </ng-container>
+    <ng-container matColumnDef="pregnancyDetectionResult30Day">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Pregnancy (30d)</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.pregnancyDetectionResult30Day}}</td>
+    </ng-container>
+    <ng-container matColumnDef="pregnancyDetectionResult60Day">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Pregnancy (60d)</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.pregnancyDetectionResult30Day}}</td>
+    </ng-container>
+    <ng-container matColumnDef="successfulFertilizationNumber">
+        <th class="w-10ch" mat-header-cell *matHeaderCellDef>Succesful Fertilizations</th>
+        <td mat-cell *matCellDef="let measurement">{{measurement.successfulFertilizationNumber}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

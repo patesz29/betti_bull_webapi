@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-
 export class AppConfig {
 
-    private _config: { [key: string]: string };
+    private config: { [key: string]: string };
 
     constructor() {
 
-        this._config = {
+        this.config = {
 
             PathBackEndAPI: 'http://localhost:5000/api/'
 
@@ -16,16 +15,16 @@ export class AppConfig {
 
     }
 
-    get setting():{ [key: string]: string } {
+    get setting(): { [key: string]: string } {
 
-        return this._config;
+        return this.config;
 
     }
 
     get(key: any) {
 
-        return this._config[key];
+        return this.config[key];
 
     }
 
-};
+}

@@ -16,16 +16,23 @@ import { AppConfig } from '../config/config';
 
 export class CowMeasurementService extends BaseService {
 
-  private pathAPI = this.config.setting['PathBackEndAPI'];
+  private pathAPI = this.config.setting.PathBackEndAPI;
 
   constructor(private http: HttpClient, private config: AppConfig) { super(); }
 
-    getCowMeasurements(): Observable<CowMeasurement[]> {
+  getCowMeasurements(): Observable<CowMeasurement[]> {
 
-    return this.http.get<CowMeasurement[]>(this.pathAPI + 'GetAllMeasurements', super.header()).pipe(
+     return this.http.get<CowMeasurement[]>(this.pathAPI + 'Cow/GetAllMeasurements', super.header()).pipe(
 
-    catchError(super.handleError));
-    }
+      catchError(super.handleError));
+  }
+
+//   getCows(): Observable<Cow[]> {
+
+//     return this.http.get<Cow[]>(this.pathAPI + 'GetAllMeasurements', super.header()).pipe(
+
+//      catchError(super.handleError));
+//  }
 
   }
 export class TableDemo implements OnInit {

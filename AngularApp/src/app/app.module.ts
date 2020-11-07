@@ -11,6 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 
 import { FormsModule } from '@angular/forms';
 
+import { MatTableModule } from '@angular/material/table';
+import { CowMeasurementService } from './services/cow-measurement-service.service';
+import { AppConfig } from './config/config';
+
 
 
 @NgModule({
@@ -24,9 +28,13 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ],
-  providers: [],
+  providers: [
+    CowMeasurementService,
+    AppConfig
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
